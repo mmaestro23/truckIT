@@ -97,6 +97,56 @@
             <div class="row g-4">
                 <div class="col-sm-12 col-xl-6">
                     <div class="bg-secondary rounded h-100 p-4">
+                        <h6 class="mb-4">Available Drivers</h6>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Names</th>
+                                <th scope="col">Phone No</th>
+                                <th scope="col">Address</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="driver : ${listDrivers}">
+                                <tr>
+                                    <td>[[${driver.id}]]</td>
+                                    <td>[[${driver.name}]]</td>
+                                    <td>[[${driver.phoneNumber}]]</td>
+                                    <td>[[${driver.address}]]</td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-secondary rounded h-100 p-4">
+                        <h6 class="mb-4">Available Trucks</h6>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Model</th>
+                                <th scope="col">Mileage</th>
+                                <th scope="col">Plate No</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="truck : ${listTrucks}">
+                                <tr>
+                                    <td>[[${truck.id}]]</td>
+                                    <td>[[${truck.model}]]</td>
+                                    <td>[[${truck.mileage}]]</td>
+                                    <td>[[${truck.licensePlate}]]</td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-secondary rounded h-100 p-4">
                         <h6 class="mb-4">Testimonial</h6>
                         <div class="owl-carousel testimonial-carousel">
                             <div class="testimonial-item text-center">

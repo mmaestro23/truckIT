@@ -5,6 +5,7 @@ import com.maestro.truckIT.model.Ordered;
 import com.maestro.truckIT.model.Truck;
 import com.maestro.truckIT.model.Users;
 import com.maestro.truckIT.service.*;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,11 +38,15 @@ public class AuthController {
     }
 
     @GetMapping("/")
-    public String showData() {
+    public String showData(Model model) {
+        List<Driver> listDrivers = driversService.listAll();
+        List<Truck> listTrucks = trucksService.listAll();
+        model.addAttribute("listDrivers", listDrivers);
+        model.addAttribute("listTrucks", listTrucks);
         return "index";
     }
 
-    @GetMapping("/dash")
+    @GetMapping( "/dash")
     public String showDataOnDash(Model model) {
         List<Users> listUsers = service.listAll();
         List<Driver> listDrivers = driversService.listAll();
@@ -51,8 +56,11 @@ public class AuthController {
         model.addAttribute("listDrivers", listDrivers);
         model.addAttribute("listTrucks", listTrucks);
         model.addAttribute("listOrders", listOrders);
+
         return "dash";
     }
+
+
 
     @GetMapping("/register")
     public String showNewForm(Model model){

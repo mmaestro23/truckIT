@@ -1,6 +1,7 @@
 package com.maestro.truckIT.controller;
 
 import com.maestro.truckIT.model.Truck;
+import com.maestro.truckIT.service.DriversService;
 import com.maestro.truckIT.service.TrucksService;
 import com.maestro.truckIT.service.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
