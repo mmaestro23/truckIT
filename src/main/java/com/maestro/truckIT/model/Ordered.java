@@ -31,6 +31,7 @@ public class Ordered {
     private String deliveryAddress;
 
     private String contactNumber;
+    private String email;
 
     @Column(length = 64)
     private String photo;
@@ -52,13 +53,14 @@ public class Ordered {
     public Ordered() {
     }
 
-    public Ordered(Long id, LocalDateTime orderDateTime, String customerName, String item, String deliveryAddress, String contactNumber, String photo, Driver driver, Truck truck) {
+    public Ordered(Long id, LocalDateTime orderDateTime, String customerName, String item, String deliveryAddress, String contactNumber, String email, String photo, Driver driver, Truck truck) {
         this.id = id;
         this.orderDateTime = orderDateTime;
         this.customerName = customerName;
         this.item = item;
         this.deliveryAddress = deliveryAddress;
         this.contactNumber = contactNumber;
+        this.email = email;
         this.photo = photo;
         this.driver = driver;
         this.truck = truck;
@@ -112,6 +114,14 @@ public class Ordered {
         this.contactNumber = contactNumber;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPhoto() {
         return photo;
     }
@@ -145,6 +155,7 @@ public class Ordered {
                 ", item='" + item + '\'' +
                 ", deliveryAddress='" + deliveryAddress + '\'' +
                 ", contactNumber='" + contactNumber + '\'' +
+                ", email='" + email + '\'' +
                 ", photo='" + photo + '\'' +
                 ", driver=" + driver +
                 ", truck=" + truck +
