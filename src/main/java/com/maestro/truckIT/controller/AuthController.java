@@ -4,9 +4,16 @@ import com.maestro.truckIT.model.Driver;
 import com.maestro.truckIT.model.Ordered;
 import com.maestro.truckIT.model.Truck;
 import com.maestro.truckIT.model.Users;
+import com.maestro.truckIT.repo.OrderRepo;
 import com.maestro.truckIT.service.*;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,12 +36,18 @@ public class AuthController {
 
     private OrderService orderService;
 
+    private JavaMailSender mailSender;
+
+    private OrderRepo orderRepo;
+
     @Autowired
-    public AuthController(UsersService service, DriversService driversService, TrucksService trucksService, OrderService orderService) {
+    public AuthController(UsersService service, DriversService driversService, TrucksService trucksService, OrderService orderService, JavaMailSender mailSender, OrderRepo orderRepo) {
         this.service = service;
         this.driversService = driversService;
         this.trucksService = trucksService;
         this.orderService = orderService;
+        this.mailSender = mailSender;
+        this.orderRepo = orderRepo;
     }
 
     @GetMapping("/")
@@ -129,5 +142,41 @@ public class AuthController {
             ra.addFlashAttribute("message", e.getMessage());
         }
         return "redirect:/dash";
+    }
+
+    @GetMapping("sendMail/{id}")
+    public ResponseEntity<Ordered> orderedMail(@PathVariable("id") Integer id){
+        Ordered ordered = orderRepo.findById(id).get();
+        sendmail(ordered);
+        return new ResponseEntity<Ordered>(HttpStatus.OK);
+    }
+
+    private void sendmail(Ordered ordered){
+        final String emailToRecipient = ordered.getEmail();
+        final String emailSubject = "truckIT order";
+        final String emailMessage = "<html>" +
+                "<body style=\"font-family: Arial, sans-serif;\">" +
+                "<p>Dear Sir/Madam,</p>" +
+                "<p>Thank you for ordering with truckIT. Your delivery is now starting anytime soon.</p>" +
+                "<p>Order Details:</p>" +
+                "<ul>" +
+                "<li><strong>Order ID:</strong> " + ordered.getId() + "</li>" +
+                "<li><strong>Customer Name:</strong> " + ordered.getCustomerName() + "</li>" +
+                "<li><strong>Delivery Address:</strong> " + ordered.getDeliveryAddress() + "</li>" +
+                "<li><strong>Product:</strong> " + ordered.getItem() + "</li>" +
+                "</ul>" +
+                "<p>truckIT developers, MaeSTRo</p>" +
+                "</body>" +
+                "</html>";
+
+        mailSender.send(new MimeMessagePreparator() {
+            @Override
+            public void prepare(MimeMessage mimeMessage) throws Exception {
+                MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+                mimeMessageHelper.setTo(emailToRecipient);
+                mimeMessageHelper.setText(emailMessage, true);
+                mimeMessageHelper.setSubject(emailSubject);
+            }
+        });
     }
 }

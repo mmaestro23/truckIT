@@ -1,4 +1,4 @@
-package com.maestro.truckIT;
+package com.maestro.truckIT.config;
 
 import org.springframework.web.multipart.MultipartFile;
 

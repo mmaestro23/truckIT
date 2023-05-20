@@ -1,6 +1,6 @@
 package com.maestro.truckIT.controller;
 
-import com.maestro.truckIT.FileUploadUtil;
+import com.maestro.truckIT.config.FileUploadUtil;
 import com.maestro.truckIT.model.Driver;
 import com.maestro.truckIT.model.Ordered;
 import com.maestro.truckIT.model.Truck;

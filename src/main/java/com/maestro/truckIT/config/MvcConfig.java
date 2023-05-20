@@ -1,4 +1,4 @@
-package com.maestro.truckIT;
+package com.maestro.truckIT.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
