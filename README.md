@@ -99,7 +99,7 @@ improving our applications. Now for you to get all the features of this web app,
 to get there.
 Username: admin
 Password: admin
-Then on the homepage you can add /dash in the url to be there or use the dropdown in the top right corner and click on Dashboard to get navigated there!
+Then on the homepage you can add /dash in the url to be there or click dashboard on the navigation. It's added there when you an admin.
 There you go, you have all the features of my app just like me. 
 
 Placing a Delivery Order:
