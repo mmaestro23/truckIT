@@ -73,6 +73,6 @@ public class OrderedController {
         String uploadDir = "ordered-photo" + save.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         ra.addFlashAttribute("messageOrder", "Order Received.");
-        return "redirect:/dash";
+        return "redirect:/";
     }
 }

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Truck IT</title>
+    <title>Truck IT - Dashboard</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -304,7 +304,7 @@
                                             <td>[[${ordered.deliveryAddress}]]</td>
                                             <td><img th:src="${ordered.photoImagePath}" width="30" height="30" alt=""/></td>
                                             <td>[[${ordered.orderDateTime}]]</td>
-                                            <td><div sec:authorize="hasAnyAuthority('ADMIN')"><a class="btn btn-sm btn-primary" th:href="@{'sendMail/' + ${ordered.id}}">Approve</a></div></td>
+                                            <td><div sec:authorize="hasAnyAuthority('ADMIN')"><a class="btn btn-sm btn-primary" th:href="@{'sendMail/' + ${ordered.id}}">Mail</a></div></td>
                                         </tr>
                                     </th:block>
                                     </tbody>
