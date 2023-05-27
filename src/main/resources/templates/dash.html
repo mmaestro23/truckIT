@@ -54,20 +54,22 @@
                         <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
-                    <div class="ms-3" th:if="${session.user}">
-                        <h6 class="mb-0" sec:authentication="name"></h6>
-                        <span sec:authentication="principal.authorities">Roles</span>
-                        <p th:text="'Username: ' + ${session.user.username}"></p>
+                    <div class="ms-3" sec:authorize="isAuthenticated()">
+                        <span class="d-none d-lg-inline-flex" sec:authentication="principal.authorities">Roles</span>
+                        <h6 class="mb-0">Online</h6>
                     </div>
                 </div>
-                <div class="navbar-nav w-100">
-                    <a th:href="@{/dash}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                <div class="navbar-nav w-100" >
                     <a th:href="@{/}" class="nav-item nav-link"><i class="fa fa-home me-2"></i>Home</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Forms</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a th:href="@{/driverForm}" class="dropdown-item">Drivers</a>
-                            <a th:href="@{/trucksForm}" class="dropdown-item">Trucks</a>
+                    <a th:href="@{/order}" class="nav-item nav-link"><i class="fa fa-layer-group me-2"></i>Order</a>
+                    <div sec:authorize="hasAnyAuthority('ADMIN')">
+                        <a th:href="@{/dash}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Forms</a>
+                            <div class="dropdown-menu bg-transparent border-0">
+                                <a th:href="@{/driverForm}" class="dropdown-item">Drivers</a>
+                                <a th:href="@{/trucksForm}" class="dropdown-item">Trucks</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -90,13 +92,14 @@
                     <input class="form-control bg-dark border-0" type="search" placeholder="Search">
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
-                    <div class="nav-item dropdown" sec:authorize="isAuthenticated()">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex" sec:authentication="name"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a th:href="@{/logout}" class="dropdown-item">Log Out</a>
+                    <div class="nav-item dropdown">
+                        <div sec:authorize="isAuthenticated()">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                <b><span class="d-none d-lg-inline-flex" sec:authentication="name">Username</span></b><br>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                                <a th:href="@{/logout}" class="dropdown-item">Log Out</a>
+                            </div>
                         </div>
                     </div>
                 </div>
