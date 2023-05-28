@@ -65,10 +65,10 @@
                                 <input type="password" class="form-control" id="password" name="password">
                                 <label for="password">Password</label>
                             </div>
-                            <div th:if="${param.error}" alert alert-success>
+                            <div style="color: red" th:if="${param.error}" alert alert-success>
                                 Invalid Username AND/OR Password
                             </div>
-                            <div th:if="${param.logout}" alert alert-success>
+                            <div style="color: green" th:if="${param.logout}" alert alert-success>
                                 You're logged out!
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-4">
