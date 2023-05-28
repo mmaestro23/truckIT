@@ -35,7 +35,7 @@ public class UserDetailsService implements org.springframework.security.core.use
                     .collect(Collectors.toList());
 
             User authUser = new User(
-                    user.getEmail(),
+                    user.getUsername(),
                     user.getPassword(),
                     authorities
             );

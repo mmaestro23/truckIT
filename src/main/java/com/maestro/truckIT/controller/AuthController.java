@@ -7,7 +7,6 @@ import com.maestro.truckIT.model.Users;
 import com.maestro.truckIT.repo.OrderRepo;
 import com.maestro.truckIT.service.*;
 import jakarta.mail.internet.MimeMessage;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 public class AuthController {

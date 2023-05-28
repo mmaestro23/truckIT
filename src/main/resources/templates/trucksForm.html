@@ -95,7 +95,8 @@
         <div class="nav-item dropdown">
           <div sec:authorize="isAuthenticated()">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-              <b><span class="d-none d-lg-inline-flex" sec:authentication="name">Username</span></b><br>
+              <span class="d-none d-lg-inline-flex">Username:</span><br>
+              <b><span class="d-none d-lg-inline-flex" sec:authentication="name">Username</span></b>
             </a>
             <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
               <a th:href="@{/dash}" href="#" class="dropdown-item">Dashboard</a>
