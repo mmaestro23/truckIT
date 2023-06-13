@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @Controller
@@ -143,10 +145,10 @@ public class AuthController {
     }
 
     @GetMapping("sendMail/{id}")
-    public ResponseEntity<Ordered> orderedMail(@PathVariable("id") Integer id){
+    public ResponseEntity<Ordered> orderedMail(@PathVariable("id") Integer id) throws URISyntaxException {
         Ordered ordered = orderRepo.findById(id).get();
         sendmail(ordered);
-        return new ResponseEntity<Ordered>(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.SEE_OTHER).location(new URI("/success")).build();
     }
 
     private void sendmail(Ordered ordered){
@@ -176,5 +178,10 @@ public class AuthController {
                 mimeMessageHelper.setSubject(emailSubject);
             }
         });
+    }
+
+    @GetMapping("/success")
+    public String showSuccessPage(){
+        return "success";
     }
 }

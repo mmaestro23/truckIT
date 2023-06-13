@@ -25,7 +25,6 @@ import java.util.List;
 public class OrderedController {
 
     private DriversService driversService;
-
     private TrucksService trucksService;
     private OrderService orderService;
 
